@@ -24,6 +24,22 @@
     </header>
 
     <section class="content-body">
+      <% products = Product.find :all
+         projects = Project.find :all
+      %>
+      <table class='matrix-table'>
+        <thead>
+          <th></th>
+          <th repeat="&projects"><view/></th>
+        </thead>
+        <tbody>
+          <tr repeat="&products">
+            <% product_projects = this.projects %>
+            <td><view/></td>
+            <td repeat="&projects"><if test="&product_projects.include? this">X</if></td>
+          </tr>
+        </tbody>
+      </table>
     </section>
   </content:>
 

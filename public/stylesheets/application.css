@@ -1,0 +1,10 @@
+table.matrix-table {
+    margin: 5px;
+    border-collapse: collapse;
+}
+
+table.matrix-table td, table.matrix-table th {
+    border-width: 1px;
+    border-style: solid;
+    padding: 5px;
+}
