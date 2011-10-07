@@ -5,6 +5,16 @@
 CcOrganized::Application.routes.draw do
 
 
+  # Resource routes for controller "products"
+  get 'products(.:format)' => 'products#index', :as => 'products'
+  get 'products/new(.:format)', :as => 'new_product'
+  get 'products/:id/edit(.:format)' => 'products#edit', :as => 'edit_product'
+  get 'products/:id(.:format)' => 'products#show', :as => 'product', :constraints => { :id => %r([^/.?]+) }
+  post 'products(.:format)' => 'products#create', :as => 'create_product'
+  put 'products/:id(.:format)' => 'products#update', :as => 'update_product', :constraints => { :id => %r([^/.?]+) }
+  delete 'products/:id(.:format)' => 'products#destroy', :as => 'destroy_product', :constraints => { :id => %r([^/.?]+) }
+
+
   # Resource routes for controller "projects"
   get 'projects(.:format)' => 'projects#index', :as => 'projects'
   get 'projects/new(.:format)', :as => 'new_project'

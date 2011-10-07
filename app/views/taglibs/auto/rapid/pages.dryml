@@ -5,9 +5,129 @@
 <def tag="main-nav">
   <navigation class="main-nav" merge-attrs param="default">
     <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Product"><ht key="product.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&Project"><ht key="project.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
+
+
+
+
+<!-- ====== Product Pages ====== -->
+
+<def tag="index-page" for="Product">
+  <page merge title="#{ht 'product.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page product" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="product.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="product.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="product.actions.new">New Product</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="Product">
+  <page merge title="#{ht 'product.new.title', :default=>[' New Product'] }">
+    <body: class="new-page product" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="product.new.heading">
+            New Product
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'product.actions.create', :default=>['Create Product']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="Product">
+  <page merge title="#{ht 'product.show.title', :default=>['Product'] }">
+
+    <body: class="show-page product" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="product.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
+                <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="product.actions.edit" name="&this.respond_to?(:name) ? this.name : ''">
+                Edit Product
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="Product">
+  <page merge title="#{ht 'product.edit.title', :default=>['Edit Product'] }">
+
+    <body: class="edit-page product" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="product.edit.heading" name="&this.respond_to?(:name) ? this.name : ''">
+            Edit Product
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'product.actions.delete', :default=>['Remove This Product']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
 
 
 

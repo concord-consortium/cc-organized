@@ -1,16 +1,13 @@
-class Project < ActiveRecord::Base
+class ProjectProduct < ActiveRecord::Base
 
   hobo_model # Don't put anything above this
 
   fields do
-    name :string
     timestamps
   end
 
-  has_many :project_products, :dependent => :destroy
-  has_many :products, :through => :project_products, :accessible => true
-
-  children :products
+  belongs_to :project
+  belongs_to :product
 
   # --- Permissions --- #
 

@@ -7,6 +7,11 @@ class Product < ActiveRecord::Base
     timestamps
   end
 
+  has_many :project_products, :dependent => :destroy
+  has_many :projects, :through => :project_products, :accessible => true
+  
+  children :projects
+
   # --- Permissions --- #
 
   def create_permitted?
