@@ -5,11 +5,29 @@
     <header: param>
       <h4 param="heading"><name/></h4>
     </header:>
+    <body: param>
+      <ht key="project.collection.count" count="&this.projects.size">
+         <count:projects param/>
+      </ht>
+    </body:>
   </card>
 </def>
 
 <def tag="card" for="Project">
   <card class="project" param="default" merge>
+    <header: param>
+      <h4 param="heading"><name/></h4>
+    </header:>
+    <body: param>
+      <ht key="product.collection.count" count="&this.products.size">
+         <count:products param/>
+      </ht>
+    </body:>
+  </card>
+</def>
+
+<def tag="card" for="ProjectProduct">
+  <card class="project-product" param="default" merge>
     <header: param>
       <h4 param="heading"><name/></h4>
     </header:>

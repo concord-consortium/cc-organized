@@ -7,6 +7,7 @@
     <nav-item href="#{base_url}/">Home</nav-item>
     <nav-item with="&Product"><ht key="product.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
     <nav-item with="&Project"><ht key="project.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&ProjectProduct"><ht key="project_product.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
   </navigation>
 </def>
 
@@ -82,6 +83,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:projects param="parent-link">&laquo; <ht key="product.actions.back_to_parent" parent="Project" name="&this">Back to <name/></ht></a:projects>
             <h2 param="heading">
               <ht key="product.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -98,6 +100,15 @@
           </header>
 
           <section param="content-body">
+            <section param="collection-section">
+              <h3 param="collection-heading">
+                <ht key="project.collection.heading" count="&this.projects.count" >
+                  <human-collection-name collection="projects" your/>
+                </ht>
+              </h3>
+
+              <collection:projects param/>
+            </section>
           </section>
     </content:>
 
@@ -118,6 +129,126 @@
           </ht>
         </h2>
         <delete-button label="#{ht 'product.actions.delete', :default=>['Remove This Product']}" param/>
+      </section>
+
+      <section param="content-body">
+        <form param/>
+      </section>
+    </content:>
+
+  </page>
+</def>
+
+
+
+
+
+<!-- ====== ProjectProduct Pages ====== -->
+
+<def tag="index-page" for="ProjectProduct">
+  <page merge title="#{ht 'project_product.index.title', :default=>[model.model_name.human(:count=>100)] }">
+    <body: class="index-page project-product" param/>
+
+    <content: param>
+      <header param="content-header">
+        <h2 param="heading">
+          <ht key="project_product.index.heading">
+            <model-name-human model="&model"/>
+          </ht>
+        </h2>
+
+        <p param="count" if>
+          <ht key="project_product.collection.count" count="&collection_count">
+            <count summary/>
+          </ht>
+        </p>
+      </header>
+
+      <section param="content-body">
+        <a action="new" to="&model" param="new-link">
+          <ht key="project_product.actions.new">New Project product</ht>
+        </a>
+
+        <page-nav param="top-page-nav"/>
+
+        <collection param/>
+
+        <page-nav param="bottom-page-nav"/>
+
+
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="new-page" for="ProjectProduct">
+  <page merge title="#{ht 'project_product.new.title', :default=>[' New Project product'] }">
+    <body: class="new-page project-product" param/>
+
+    <content: param>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="project_product.new.heading">
+            New Project product
+          </ht>
+        </h2>
+      </section>
+
+      <section param="content-body">
+        <form param>
+          <submit: label="#{ht 'project_product.actions.create', :default=>['Create Project product']}"/>
+        </form>
+      </section>
+    </content:>
+  </page>
+</def>
+
+
+<def tag="show-page" for="ProjectProduct">
+  <page merge title="#{ht 'project_product.show.title', :default=>['Project product'] }">
+
+    <body: class="show-page project-product" param/>
+
+    <content: param>
+          <header param="content-header">
+            <h2 param="heading">
+              <ht key="project_product.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
+                <name/>
+              </ht>
+            </h2>
+
+            <record-flags fields="" param/>
+
+            <a action="edit" if="&can_edit?" param="edit-link">
+              <ht key="project_product.actions.edit" name="&this.respond_to?(:name) ? this.name : ''">
+                Edit Project product
+              </ht>
+            </a>
+          </header>
+
+          <section param="content-body">
+            <field-list fields="product, project" param/>
+          </section>
+    </content:>
+
+  </page>
+</def>
+
+
+<def tag="edit-page" for="ProjectProduct">
+  <page merge title="#{ht 'project_product.edit.title', :default=>['Edit Project product'] }">
+
+    <body: class="edit-page project-product" param/>
+
+    <content:>
+      <section param="content-header">
+        <h2 param="heading">
+          <ht key="project_product.edit.heading" name="&this.respond_to?(:name) ? this.name : ''">
+            Edit Project product
+          </ht>
+        </h2>
+        <delete-button label="#{ht 'project_product.actions.delete', :default=>['Remove This Project product']}" param/>
       </section>
 
       <section param="content-body">
@@ -201,6 +332,7 @@
 
     <content: param>
           <header param="content-header">
+            <a:products param="parent-link">&laquo; <ht key="project.actions.back_to_parent" parent="Product" name="&this">Back to <name/></ht></a:products>
             <h2 param="heading">
               <ht key="project.show.heading" name="&this.respond_to?(:name) ? this.name : ''">
                 <name/>
@@ -217,6 +349,15 @@
           </header>
 
           <section param="content-body">
+            <section param="collection-section">
+              <h3 param="collection-heading">
+                <ht key="product.collection.heading" count="&this.products.count" >
+                  <human-collection-name collection="products" your/>
+                </ht>
+              </h3>
+
+              <collection:products param/>
+            </section>
           </section>
     </content:>
 
