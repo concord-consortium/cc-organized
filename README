@@ -12,4 +12,15 @@ After that is complete you'll need to make and migrate the databases:
 rake db:create
 rake db:migrate
 
+If you want to deploy to Heroku you need the heroku gem installed:
+gem install heroku
 
+Create the app:
+heroku create --stack cedar
+
+Push the app to heroku
+git push heroku master
+
+The push doesn't migrate the db for some reason
+heroku run rake db:migrate
+heroku restart
