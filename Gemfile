@@ -29,4 +29,6 @@ gem 'pg'
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem "hobo", "= 1.3.0.RC2"
+
+gem "hobo",   "= 1.3.0.RC2"
+gem "heroku", "~> 2.8.5"
