@@ -5,6 +5,16 @@
 CcOrganized::Application.routes.draw do
 
 
+  # Resource routes for controller "projects"
+  get 'projects(.:format)' => 'projects#index', :as => 'projects'
+  get 'projects/new(.:format)', :as => 'new_project'
+  get 'projects/:id/edit(.:format)' => 'projects#edit', :as => 'edit_project'
+  get 'projects/:id(.:format)' => 'projects#show', :as => 'project', :constraints => { :id => %r([^/.?]+) }
+  post 'projects(.:format)' => 'projects#create', :as => 'create_project'
+  put 'projects/:id(.:format)' => 'projects#update', :as => 'update_project', :constraints => { :id => %r([^/.?]+) }
+  delete 'projects/:id(.:format)' => 'projects#destroy', :as => 'destroy_project', :constraints => { :id => %r([^/.?]+) }
+
+
   # Lifecycle routes for controller "users"
   post 'users/signup(.:format)' => 'users#do_signup', :as => 'do_user_signup'
   get 'users/signup(.:format)' => 'users#signup', :as => 'user_signup'
