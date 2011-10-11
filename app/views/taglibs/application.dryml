@@ -1,1 +1,31 @@
 <!-- Global taglib - these tags are shared across all subsites -->
+<include src="taglibs/auto/rapid/cards"/>
+<include src="taglibs/auto/rapid/pages"/>
+
+<extend tag="card" for="Project"> 
+  <old-card merge>
+    <body:> 
+      <div class="products">
+        Products: <repeat:products join=", "><a/></repeat><else>None</else>
+      </div>
+    </body:> 
+  </old-card>
+</extend>
+
+<extend tag="card" for="Product"> 
+  <old-card merge>
+    <body:> 
+      <div class="projects">
+        Projects: <repeat:projects join=", "><a/></repeat><else>None</else>
+      </div>
+    </body:> 
+  </old-card>
+</extend>
+
+<def tag="main-nav">
+  <navigation class="main-nav" merge-attrs param="default">
+    <nav-item href="#{base_url}/">Home</nav-item>
+    <nav-item with="&Product"><ht key="product.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+    <nav-item with="&Project"><ht key="project.nav_item" count="100"><model-name-human count="100"/></ht></nav-item>
+  </navigation>
+</def>
